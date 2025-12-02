@@ -58,32 +58,32 @@ export const VerticalShowcase: React.FC = () => {
 
           const isActive = offset === 0;
           const absOffset = Math.abs(offset);
-          const isVisible = absOffset <= 1;
+          const isVisible = absOffset <= 2;
 
-          const translateZ = -absOffset * 80;
-          const translateY = offset * 15;
-          const scale = 1 - absOffset * 0.25;
-          const opacity = absOffset > 1 ? 0 : 1 - absOffset * 0.4;
-          const rotateY = offset * -8;
+          // Same calculations as original carousel but for vertical cards
+          const translateX = offset * 120; // Horizontal spacing between cards
+          const scale = 1 - absOffset * 0.2;
+          const zIndex = 10 - absOffset;
+          const opacity = absOffset > 2 ? 0 : 1;
+          const rotateY = offset * -15; // Strong rotation like original
 
           return (
             <div
               key={index}
-              className="absolute top-1/2 left-1/2 transition-all duration-700 ease-out rounded-lg overflow-hidden cursor-pointer preserve-3d"
+              className="absolute top-1/2 left-1/2 transition-all duration-700 ease-out rounded-lg overflow-hidden cursor-pointer"
               style={{
                 width: '280px',
                 height: '380px',
                 backgroundImage: `url(${src})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                boxShadow: isActive
-                  ? '0 25px 50px rgba(0, 0, 0, 0.35)'
-                  : '0 15px 30px rgba(0, 0, 0, 0.2)',
-                transform: `translate(-50%, -50%) translateZ(${translateZ}px) translateY(${translateY}px) scale(${scale}) rotateY(${rotateY}deg)`,
+                boxShadow: isActive ? '0 30px 60px rgba(0, 0, 0, 0.3)' : '0 20px 40px rgba(0, 0, 0, 0.15)',
+                cursor: 'pointer',
+                zIndex: zIndex,
                 opacity: opacity,
-                zIndex: 10 - absOffset,
+                transform: `translate(-50%, -50%) translateX(${translateX}px) scale(${scale}) rotateY(${rotateY}deg)`,
                 pointerEvents: isVisible ? 'auto' : 'none',
-                filter: isActive ? 'brightness(1.05)' : 'brightness(0.85) blur(1px)',
+                filter: isActive ? 'brightness(1.05)' : 'brightness(0.9) blur(1px)',
               }}
               onClick={() => {
                 setActiveIndex(index);
@@ -92,10 +92,10 @@ export const VerticalShowcase: React.FC = () => {
               }}
             >
               {/* Gradient Overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-60'}`}>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <span className="text-[9px] uppercase tracking-widest mb-1 block">Collection 2024</span>
-                  <h4 className="font-serif text-lg">Luxe Piece #{index + 1}</h4>
+              <div className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <span className="text-[10px] uppercase tracking-widest mb-1 block">Collection 2024</span>
+                  <h3 className="font-serif text-xl">Luxe Piece #{index + 1}</h3>
                 </div>
               </div>
             </div>
