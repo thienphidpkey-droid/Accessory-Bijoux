@@ -3,7 +3,7 @@ import { PRODUCTS } from './constants';
 import { ProductCard } from './components/ProductCard';
 import { ParallaxBackground } from './components/ParallaxBackground';
 import { FadeIn } from './components/FadeIn';
-import { JewelryCarousel } from './components/JewelryCarousel';
+import { VerticalShowcase } from './components/VerticalShowcase';
 import { ChevronDown, ShoppingBag, Menu, Search } from 'lucide-react';
 
 const Navbar: React.FC = () => (
@@ -26,33 +26,43 @@ const Navbar: React.FC = () => (
 );
 
 const Hero: React.FC = () => (
-  <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
-    <FadeIn className="max-w-5xl mx-auto z-10">
-      <div className="mb-6 inline-block">
-        <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-luxury-slate border-b border-luxury-silver/40 pb-3">
-          Winter 2024 Collection
-        </span>
-      </div>
-      <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-luxury-black mb-8 leading-[0.9] tracking-tight">
-        PURE <br className="md:hidden" />
-        <span className="text-transparent bg-clip-text bg-gradient-to-b from-luxury-silver via-gray-400 to-gray-600 italic">
-          PLATINUM
-        </span>
-      </h1>
-      <p className="text-lg md:text-xl text-gray-500 font-sans font-light tracking-wide max-w-xl mx-auto mb-12 leading-relaxed">
-        Handcrafted silver and platinum masterpieces. <br />
-        <span className="text-luxury-black mt-2 block">Designed for the modern era.</span>
-      </p>
+  <section className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+    <div className="max-w-7xl mx-auto w-full z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        {/* Left Column - PURE PLATINUM Content */}
+        <FadeIn className="text-center lg:text-left">
+          <div className="mb-6 inline-block">
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-luxury-slate border-b border-luxury-silver/40 pb-3">
+              Winter 2024 Collection
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-serif text-luxury-black mb-8 leading-[0.9] tracking-tight">
+            PURE <br className="md:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-luxury-silver via-gray-400 to-gray-600 italic">
+              PLATINUM
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-500 font-sans font-light tracking-wide max-w-xl lg:mx-0 mx-auto mb-12 leading-relaxed">
+            Handcrafted silver and platinum masterpieces. <br />
+            <span className="text-luxury-black mt-2 block">Designed for the modern era.</span>
+          </p>
 
-      <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-        <button className="px-10 py-4 bg-luxury-black text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-luxury-slate transition-colors shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
-          Shop Collection
-        </button>
-        <button className="px-10 py-4 bg-transparent border border-luxury-black/20 text-luxury-black text-xs font-bold uppercase tracking-[0.25em] hover:bg-luxury-black hover:text-white transition-all">
-          View Lookbook
-        </button>
+          <div className="flex flex-col md:flex-row gap-6 justify-center lg:justify-start items-center">
+            <button className="px-10 py-4 bg-luxury-black text-white text-xs font-bold uppercase tracking-[0.25em] hover:bg-luxury-slate transition-colors shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+              Shop Collection
+            </button>
+            <button className="px-10 py-4 bg-transparent border border-luxury-black/20 text-luxury-black text-xs font-bold uppercase tracking-[0.25em] hover:bg-luxury-black hover:text-white transition-all">
+              View Lookbook
+            </button>
+          </div>
+        </FadeIn>
+
+        {/* Right Column - Masterpiece Showcase Vertical Cards */}
+        <FadeIn delay={200} className="flex justify-center lg:justify-end">
+          <VerticalShowcase />
+        </FadeIn>
       </div>
-    </FadeIn>
+    </div>
 
     {/* Scroll Indicator */}
     <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
@@ -114,10 +124,6 @@ export default function App() {
             </FadeIn>
           ))}
         </div>
-
-        <FadeIn delay={300} className="mt-20">
-          <JewelryCarousel />
-        </FadeIn>
 
         <FadeIn className="mt-40 mb-20">
           <div className="relative w-full overflow-hidden bg-slate-100 border border-white group cursor-pointer shadow-lg">
