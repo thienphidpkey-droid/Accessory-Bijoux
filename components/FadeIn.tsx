@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FadeInSectionProps } from '../types';
 
-export const FadeIn: React.FC<FadeInSectionProps> = ({ children, delay = 0, className = '' }) => {
+export const FadeIn: React.FC<FadeInSectionProps> = React.memo(({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
 
@@ -29,12 +29,11 @@ export const FadeIn: React.FC<FadeInSectionProps> = ({ children, delay = 0, clas
   return (
     <div
       ref={domRef}
-      className={`transition-all duration-1000 ease-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-      } ${className}`}
+      className={`transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>
   );
-};
+});

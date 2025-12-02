@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 const showcaseImages = [
   "/featured-jewelry-1.png",
@@ -8,7 +8,7 @@ const showcaseImages = [
   "https://loremflickr.com/280/380/jewelry,necklace?lock=13",
 ];
 
-export const VerticalShowcase: React.FC = () => {
+export const VerticalShowcase: React.FC = React.memo(() => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -20,17 +20,20 @@ export const VerticalShowcase: React.FC = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % showcaseImages.length);
     setIsPaused(true);
     setTimeout(() => setIsPaused(false), 5000);
-  };
+  }, []);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + showcaseImages.length) % showcaseImages.length);
     setIsPaused(true);
     setTimeout(() => setIsPaused(false), 5000);
-  };
+  }, []);
+
+  const handleMouseEnter = useCallback(() => setIsPaused(true), []);
+  const handleMouseLeave = useCallback(() => setIsPaused(false), []);
 
   return (
     <div className="flex flex-col items-center w-full max-w-sm">
@@ -48,8 +51,8 @@ export const VerticalShowcase: React.FC = () => {
       <div
         className="relative w-full perspective-1000"
         style={{ height: '420px' }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {showcaseImages.map((src, index) => {
           let offset = index - activeIndex;
@@ -122,4 +125,4 @@ export const VerticalShowcase: React.FC = () => {
       </div>
     </div>
   );
-};
+});
