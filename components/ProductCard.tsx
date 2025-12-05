@@ -12,7 +12,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) 
       <div className="relative w-full h-full duration-700 preserve-3d group-hover:rotate-y-180 transition-transform ease-[cubic-bezier(0.23,1,0.32,1)] shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
 
         {/* Front of Card */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rounded-sm overflow-hidden bg-white border border-luxury-platinum">
+        <div className="absolute inset-0 w-full h-full backface-hidden rounded-sm overflow-hidden bg-white border-2 border-luxury-platinum/40 group-hover:border-luxury-silver/60 group-hover:shadow-[0_0_20px_rgba(192,192,192,0.3)] transition-all duration-500">
           {/* Zoom effect on image */}
           <div className="absolute inset-0 overflow-hidden">
             <img
@@ -41,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) 
         </div>
 
         {/* Back of Card */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-sm overflow-hidden bg-white border border-luxury-platinum flex flex-col items-center justify-center p-8 text-center shadow-inner">
+        <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-sm overflow-hidden bg-white border-2 border-luxury-platinum/40 flex flex-col items-center justify-center p-8 text-center shadow-inner">
           {/* Shimmering gradient background */}
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-slate-50 to-transparent opacity-50 animate-shimmer bg-[length:200%_200%] pointer-events-none"></div>
 
